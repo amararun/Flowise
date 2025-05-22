@@ -1,7 +1,7 @@
-name: Build and Push Flowise Docker Image
+name: Build and Push Flowise Docker Image (ARM64 only)
 
 on:
-  workflow_dispatch:  # Triggered manually
+  workflow_dispatch:
 
 jobs:
   build:
@@ -20,11 +20,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push multi-platform Docker image
+      - name: Build and push ARM64 Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/arm64
           push: true
           tags: amarharolikar/flowise-custom:latest
